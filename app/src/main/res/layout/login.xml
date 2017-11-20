@@ -1,22 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@drawable/screen">
 
     <Button
         android:id="@+id/button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="55dp"
+        android:layout_height="60dp"
+        android:backgroundTint="?android:attr/textColorHintInverse"
+        android:fontFamily="sans-serif-condensed"
         android:text="@string/botonLoginCliente"
-        android:layout_alignBottom="@+id/button2"
-        android:layout_centerHorizontal="true" />
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_above="@+id/button2"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
+        android:backgroundTint="?android:attr/textColorHighlightInverse"
+        android:fontFamily="sans-serif-condensed"
+        android:text="@string/botonLoginServidor"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        android:textStyle="bold"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/button"
-        android:layout_marginBottom="55dp"
-        android:text="@string/botonLoginServidor" />
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="16dp" />
 </RelativeLayout>
