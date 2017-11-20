@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Socket</string>
+    <string name="app_name">brosChat</string>
+    <string name="input_mensaje">Escribir mensaje</string>
 </resources>
