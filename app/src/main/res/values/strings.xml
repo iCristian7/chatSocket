@@ -2,5 +2,7 @@
     <string name="app_name">brosChat</string>
     <string name="botonLoginServidor">Servidor</string>
     <string name="botonLoginCliente">Cliente</string>
+    <string name="textLogin">Elige tu rol..........</string>
+
 
 </resources>

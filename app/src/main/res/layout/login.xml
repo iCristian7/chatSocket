@@ -6,7 +6,10 @@
     <Button
         android:id="@+id/button"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/input_redondeado"
         android:backgroundTint="?android:attr/textColorHintInverse"
         android:fontFamily="sans-serif-condensed"
         android:text="@string/botonLoginCliente"
@@ -14,19 +17,35 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_above="@+id/button2"
-        android:layout_alignParentStart="true" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:backgroundTint="?android:attr/textColorHighlightInverse"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="10dp"
+        android:layout_marginBottom="11dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/input_redondeado"
+        android:backgroundTint="#a6db3d"
         android:fontFamily="sans-serif-condensed"
         android:text="@string/botonLoginServidor"
         android:textColor="@android:color/background_light"
         android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_alignParentBottom="true"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="15dp"
+        android:layout_marginStart="15dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="@string/textLogin"
+        android:textColor="@android:color/background_light"
+        android:textSize="24sp" />
 </RelativeLayout>
