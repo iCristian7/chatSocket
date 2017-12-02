@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">brosChat</string>
-    <string name="botonLoginServidor">Servidor</string>
-    <string name="botonLoginCliente">Cliente</string>
-    <string name="textLogin">La decisión es tuya.....</string>
-
-
+    <string name="app_name">Sockets</string>
+    <string name="tituloconfig">Escribe los datos del servidor</string>
+    <string name="dip">Dirección IP</string>
+    <string name="puerto">Puerto</string>
+    <string name="perCon">Personaliza tu Chat</string>
+    <string name="iniciar">Empezar</string>
+    <string name="nombre">Tu Nombre</string>
 </resources>
