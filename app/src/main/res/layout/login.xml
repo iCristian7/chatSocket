@@ -4,10 +4,10 @@
     android:background="@drawable/screen">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonCliente"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_above="@+id/button2"
+        android:layout_above="@+id/buttonServer"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -21,7 +21,7 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonServer"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
