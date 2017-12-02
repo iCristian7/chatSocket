@@ -6,4 +6,8 @@
     <string name="perCon">Personaliza tu Chat</string>
     <string name="iniciar">Empezar</string>
     <string name="nombre">Tu Nombre</string>
+    <string name="app_name">brosChat</string>
+    <string name="botonLoginServidor">Servidor</string>
+    <string name="botonLoginCliente">Cliente</string>
+    <string name="textLogin">La decisión es tuya.....</string>
 </resources>
