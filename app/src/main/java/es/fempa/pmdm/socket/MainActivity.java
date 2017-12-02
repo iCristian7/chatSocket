@@ -1,5 +1,6 @@
 package es.fempa.pmdm.socket;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -48,6 +49,12 @@ public class MainActivity extends AppCompatActivity {
         ipServer=(EditText) findViewById(R.id.ipServer);
 
         myTV=(TextView) findViewById(R.id.tvSalida);
+    }
+
+    public void goToChat(View v){
+        Intent intent = new Intent(this, Chat.class);
+        startActivity(intent);
+
     }
 
     public void startServer(View v)

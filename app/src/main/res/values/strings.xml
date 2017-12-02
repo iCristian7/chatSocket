@@ -2,5 +2,6 @@
     <string name="app_name">brosChat</string>
     <string name="botonLoginServidor">Servidor</string>
     <string name="botonLoginCliente">Cliente</string>
+    <string name="input_mensaje">Escribir mensaje</string>
 
 </resources>
