@@ -47,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
-        android:text="@string/perCon"
+        android:text="Tu Nombre"
         android:textSize="20sp" />
 
     <EditText
@@ -56,14 +56,6 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:text="@string/nombre"
-        android:textSize="20sp" />
 
 
     <Button

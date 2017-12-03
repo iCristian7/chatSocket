@@ -20,9 +20,6 @@ import java.util.Enumeration;
 
 import static es.fempa.pmdm.socket.R.id.ipServer;
 
-/**
- * Created by Christian on 20/11/2017.
- */
 
 public class ConfigCliente extends AppCompatActivity {
 
@@ -51,8 +48,6 @@ public class ConfigCliente extends AppCompatActivity {
         Puerto = (EditText) findViewById(R.id.TextPuerto);
         Nombre = (EditText) findViewById(R.id.TextNombre);
         button = (Button)findViewById(R.id.button);
-
-
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override

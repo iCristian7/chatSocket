@@ -21,10 +21,6 @@ import java.util.Enumeration;
 import static android.R.attr.button;
 import static es.fempa.pmdm.socket.R.id.ipServer;
 
-/**
- * Created by Christian on 20/11/2017.
- */
-
 public class ConfigServidor extends AppCompatActivity {
 
     EditText Puerto;
