@@ -101,7 +101,7 @@ public class Chat extends Activity {
     public void onClick(View view) {
 
         try {
-
+            Log.e("dir", String.valueOf(socket.getRemoteSocketAddress()));
             EditText et = (EditText) findViewById(R.id.messageArea);
             String str = et.getText().toString();
             Log.e("onclick",str);
