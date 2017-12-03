@@ -26,7 +26,7 @@ public class ChatServidor extends Activity {
 
     private TextView text;
 
-    public static final int SERVERPORT = 1048;
+    public static final int SERVERPORT = 4545;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

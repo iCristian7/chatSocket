@@ -58,7 +58,7 @@ public class Chat extends Activity {
 
         Intent data = getIntent();
         String tipo = data.getStringExtra("tipo");
-        //SERVERPORT = data.getIntExtra("puerto", -1);
+        SERVERPORT = data.getIntExtra("puerto", -1);
         text = (TextView) findViewById(R.id.datos);
 
         new Thread(new ClientThread()).start();
@@ -96,16 +96,34 @@ public class Chat extends Activity {
     }
 
     public void onClick(View view) {
+        String messageText = messageArea.getText().toString();
 
+        TextView textView = new TextView(Chat.this);
+        textView.setTextColor(getResources().getColor(R.color.negro));
+
+        textView.setText(messageText);
+
+        LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lp2.weight = 1.0f;
+        lp2.setMargins(0,25,5,0);
+
+
+        lp2.gravity = Gravity.LEFT;
+        textView.setBackgroundResource(R.drawable.bubble2_whatsapp);
+
+
+        lp2.gravity = Gravity.RIGHT;
+        textView.setBackgroundResource(R.drawable.bubble_whatsapp);
+
+        textView.setLayoutParams(lp2);
+        layout.addView(textView);
+        scrollView.fullScroll(View.FOCUS_DOWN);
+        messageArea.setText("");
         try {
-            Log.e("dir", String.valueOf(socket.getRemoteSocketAddress()));
-            EditText et = (EditText) findViewById(R.id.messageArea);
-            String str = et.getText().toString();
-            Log.e("onclick",str);
             PrintWriter out = new PrintWriter(new BufferedWriter(
                     new OutputStreamWriter(socket.getOutputStream())),
                     true);
-            out.println(str);
+            out.println(messageText);
         } catch (UnknownHostException e) {
             e.printStackTrace();
         } catch (IOException e) {
