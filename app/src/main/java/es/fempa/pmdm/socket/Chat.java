@@ -45,7 +45,7 @@ public class Chat extends Activity {
     Thread serverThread = null;
     private TextView text;
     private int SERVERPORT = 1048;
-    private String SERVER_IP = "192.168.100.4";
+    private String SERVER_IP = "192.168.100.6";
     private Socket socket;
 
     @Override
