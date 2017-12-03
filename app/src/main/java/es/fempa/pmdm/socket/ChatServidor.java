@@ -1,8 +1,9 @@
 package es.fempa.pmdm.socket;
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -15,11 +16,8 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.util.Enumeration;
 
-/**
- * Created by Miguel on 03/12/2017.
- */
+public class ChatServidor extends Activity {
 
-public class ChatServidor extends Activity{
     private ServerSocket serverSocket;
 
     Handler updateConversationHandler;
@@ -34,7 +32,7 @@ public class ChatServidor extends Activity{
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.servidor);
+        setContentView(R.layout.activity_chat_servidor);
 
         text = (TextView) findViewById(R.id.text2);
         text.setText(getIpAddress());
