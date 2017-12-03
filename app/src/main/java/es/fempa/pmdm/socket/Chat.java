@@ -2,6 +2,7 @@ package es.fempa.pmdm.socket;
 
 import android.app.Activity;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,6 +52,10 @@ public class Chat extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().penaltyDeath().build());
+        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll().penaltyLog().penaltyDeath().build());
+
         sendButton = (ImageView)findViewById(R.id.sendButton);
         messageArea = (EditText)findViewById(R.id.messageArea);
         layout = (LinearLayout) findViewById(R.id.layout1);
@@ -212,7 +217,7 @@ public class Chat extends Activity {
                 InetAddress serverAddr = InetAddress.getByName(SERVER_IP);
 
                 socket = new Socket(serverAddr, SERVERPORT);
-
+                Log.e("puerto cliente", String.valueOf(socket.getPort()));
             } catch (UnknownHostException e1) {
                 e1.printStackTrace();
             } catch (IOException e1) {
