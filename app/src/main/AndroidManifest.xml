@@ -21,6 +21,7 @@
         </activity>
         <activity android:name=".ConfigCliente"/>
         <activity android:name=".ConfigServidor"/>
+        <activity android:name=".Chat"/>
     </application>
 
 </manifest>
