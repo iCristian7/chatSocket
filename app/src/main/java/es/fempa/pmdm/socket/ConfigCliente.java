@@ -52,6 +52,8 @@ public class ConfigCliente extends AppCompatActivity {
         Nombre = (EditText) findViewById(R.id.TextNombre);
         button = (Button)findViewById(R.id.button);
 
+        puerto = Integer.parseInt(Puerto.getText().toString());
+
     }
 
     public void volverInicio(View view) {
