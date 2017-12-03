@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +17,11 @@ import android.widget.TextView;
 import android.content.Intent;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.ServerSocket;
@@ -59,11 +63,13 @@ public class Chat extends Activity {
         text = (TextView) findViewById(R.id.datos);
 
         if(tipo.equals("servidor")){
+            Log.e("comentario", "sevidor");
             text.setText(getIpAddress());
             updateConversationHandler = new Handler();
             this.serverThread = new Thread(new ServerThread());
             this.serverThread.start();
         }else if(tipo.equals("cliente")){
+            Log.e("comentario", "cliente");
             SERVER_IP = data.getStringExtra("ip");
             new Thread(new ClientThread()).start();
         }
@@ -72,6 +78,17 @@ public class Chat extends Activity {
             @Override
             public void onClick(View v) {
                 String messageText = messageArea.getText().toString();
+
+                //String str = et.getText().toString();
+                PrintWriter out = null;
+                try {
+                    out = new PrintWriter(new BufferedWriter(
+                            new OutputStreamWriter(socket.getOutputStream())),
+                            true);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                out.println(messageText);
 
                 TextView textView = new TextView(Chat.this);
                 textView.setTextColor(getResources().getColor(R.color.negro));
