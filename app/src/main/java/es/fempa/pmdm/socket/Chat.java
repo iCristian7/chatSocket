@@ -186,7 +186,7 @@ public class Chat extends Activity {
                 try {
 
                     String read = input.readLine();
-
+                    Log.e("ip servidor", String.valueOf(clientSocket.getRemoteSocketAddress()));
                     updateConversationHandler.post(new updateUIThread(read));
 
                 } catch (IOException e) {
