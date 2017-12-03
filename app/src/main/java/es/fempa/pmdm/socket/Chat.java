@@ -108,7 +108,9 @@ public class Chat extends Activity {
     }
 
     public void onClick(View view) {
+        Log.e("onclick","onclick");
         try {
+
             EditText et = (EditText) findViewById(R.id.messageArea);
             String str = et.getText().toString();
             PrintWriter out = new PrintWriter(new BufferedWriter(
