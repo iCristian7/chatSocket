@@ -53,9 +53,6 @@ public class Chat extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-
         sendButton = (ImageView)findViewById(R.id.sendButton);
         messageArea = (EditText)findViewById(R.id.messageArea);
         layout = (LinearLayout) findViewById(R.id.layout1);
@@ -83,17 +80,6 @@ public class Chat extends Activity {
             @Override
             public void onClick(View v) {
                 String messageText = messageArea.getText().toString();
-
-                //String str = et.getText().toString();
-                PrintWriter out = null;
-                try {
-                    out = new PrintWriter(new BufferedWriter(
-                            new OutputStreamWriter(socket.getOutputStream())),
-                            true);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                out.println(messageText);
 
                 TextView textView = new TextView(Chat.this);
                 textView.setTextColor(getResources().getColor(R.color.negro));
