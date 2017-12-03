@@ -40,9 +40,6 @@ public class Chat extends Activity {
     ScrollView scrollView;
     RelativeLayout layout_2;
 
-    private ServerSocket serverSocket;
-    Handler updateConversationHandler;
-    Thread serverThread = null;
     private TextView text;
     private int SERVERPORT = 1048;
     private String SERVER_IP = "192.168.100.6";
@@ -61,7 +58,7 @@ public class Chat extends Activity {
 
         Intent data = getIntent();
         String tipo = data.getStringExtra("tipo");
-        SERVERPORT = data.getIntExtra("puerto", -1);
+        //SERVERPORT = data.getIntExtra("puerto", -1);
         text = (TextView) findViewById(R.id.datos);
 
         new Thread(new ClientThread()).start();
