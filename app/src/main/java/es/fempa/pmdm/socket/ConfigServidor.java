@@ -56,8 +56,6 @@ public class ConfigServidor extends AppCompatActivity {
         Nombre = (EditText) findViewById(R.id.TextNombre);
         button = (Button)findViewById(R.id.button);
 
-
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
