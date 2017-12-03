@@ -108,11 +108,12 @@ public class Chat extends Activity {
     }
 
     public void onClick(View view) {
-        Log.e("onclick","onclick");
+
         try {
 
             EditText et = (EditText) findViewById(R.id.messageArea);
             String str = et.getText().toString();
+            Log.e("onclick",str);
             PrintWriter out = new PrintWriter(new BufferedWriter(
                     new OutputStreamWriter(socket.getOutputStream())),
                     true);
@@ -139,7 +140,7 @@ public class Chat extends Activity {
     class ServerThread implements Runnable {
 
         public void run() {
-            //Socket socket = null;
+            Socket socket = null;
             try {
                 serverSocket = new ServerSocket(SERVERPORT);
             } catch (IOException e) {

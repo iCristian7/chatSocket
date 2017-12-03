@@ -36,7 +36,7 @@ public class ConfigServidor extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ConfigServidor.this, Chat.class);
+                Intent intent = new Intent(ConfigServidor.this, ChatServidor.class);
                 intent.putExtra("tipo", "servidor");
                 intent.putExtra("puerto",Integer.parseInt(puerto.getText().toString()));
                 startActivity(intent);
