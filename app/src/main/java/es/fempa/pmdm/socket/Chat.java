@@ -109,7 +109,6 @@ public class Chat extends Activity {
                     new OutputStreamWriter(socket.getOutputStream())),
                     true);
             out.println(str);
-            out.flush();
         } catch (UnknownHostException e) {
             e.printStackTrace();
         } catch (IOException e) {
