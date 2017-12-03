@@ -1,5 +1,6 @@
 package es.fempa.pmdm.socket;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -15,7 +16,7 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Chat extends AppCompatActivity {
+public class Chat extends Activity {
     LinearLayout layout;
     ImageView sendButton;
     EditText messageArea;
