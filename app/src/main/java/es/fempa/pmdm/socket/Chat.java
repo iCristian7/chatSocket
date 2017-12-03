@@ -59,8 +59,8 @@ public class Chat extends Activity {
         text = (TextView) findViewById(R.id.datos);
 
         if(tipo.equals("servidor")){
+            text.setText(getIpAddress());
             updateConversationHandler = new Handler();
-
             this.serverThread = new Thread(new ServerThread());
             this.serverThread.start();
         }else if(tipo.equals("cliente")){
