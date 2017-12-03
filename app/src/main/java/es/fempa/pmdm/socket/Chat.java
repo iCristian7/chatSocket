@@ -75,7 +75,7 @@ public class Chat extends Activity {
             SERVER_IP = data.getStringExtra("ip");
             new Thread(new ClientThread()).start();
         }
-
+/*
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,7 +104,7 @@ public class Chat extends Activity {
                 messageArea.setText("");
 
             }
-        });
+        });*/
     }
 
     public void onClick(View view) {
@@ -139,7 +139,7 @@ public class Chat extends Activity {
     class ServerThread implements Runnable {
 
         public void run() {
-            Socket socket = null;
+            //Socket socket = null;
             try {
                 serverSocket = new ServerSocket(SERVERPORT);
             } catch (IOException e) {
