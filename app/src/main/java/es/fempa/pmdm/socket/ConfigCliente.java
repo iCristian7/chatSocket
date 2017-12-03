@@ -52,11 +52,12 @@ public class ConfigCliente extends AppCompatActivity {
         Nombre = (EditText) findViewById(R.id.TextNombre);
         button = (Button)findViewById(R.id.button);
 
-        puerto = Integer.parseInt(Puerto.getText().toString());
+
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                puerto = Integer.parseInt(Puerto.getText().toString());
                 Intent intent = new Intent(ConfigCliente.this, Chat.class);
                 startActivity(intent);
             }
