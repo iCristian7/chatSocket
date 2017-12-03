@@ -9,4 +9,5 @@
     <string name="botonLoginServidor">Servidor</string>
     <string name="botonLoginCliente">Cliente</string>
     <string name="textLogin">La decisión es tuya.....</string>
+    <string name="input_mensaje">Escribir mensaje</string>
 </resources>
