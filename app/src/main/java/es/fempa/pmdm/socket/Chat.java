@@ -124,6 +124,7 @@ public class Chat extends Activity {
         public void run() {
 
             try {
+                Log.e("cliente", "dentro");
                 InetAddress serverAddr = InetAddress.getByName(SERVER_IP);
 
                 socket = new Socket(serverAddr, SERVERPORT);
