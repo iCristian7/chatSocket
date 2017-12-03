@@ -80,7 +80,7 @@ public class Chat extends Activity {
 
                 LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 lp2.weight = 1.0f;
-                lp2.setMargins(0,5,5,0);
+                lp2.setMargins(15,5,5,0);
 
 
                 lp2.gravity = Gravity.LEFT;
