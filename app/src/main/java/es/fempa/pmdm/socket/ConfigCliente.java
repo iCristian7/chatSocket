@@ -54,6 +54,14 @@ public class ConfigCliente extends AppCompatActivity {
 
         puerto = Integer.parseInt(Puerto.getText().toString());
 
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ConfigCliente.this, Chat.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     public void volverInicio(View view) {
