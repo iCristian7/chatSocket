@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.content.Intent;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -61,38 +63,27 @@ public class Chat extends Activity {
         SERVERPORT = data.getIntExtra("puerto", -1);
         text = (TextView) findViewById(R.id.datos);
 
+        SERVER_IP = data.getStringExtra("ip");
+
         new Thread(new ClientThread()).start();
 
-/*
-        sendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String messageText = messageArea.getText().toString();
+    }
 
-                TextView textView = new TextView(Chat.this);
-                textView.setTextColor(getResources().getColor(R.color.negro));
-
-                textView.setText(messageText);
-
-                LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                lp2.weight = 1.0f;
-                lp2.setMargins(0,25,5,0);
-
-
-                lp2.gravity = Gravity.LEFT;
-                textView.setBackgroundResource(R.drawable.bubble2_whatsapp);
-
-
-                lp2.gravity = Gravity.RIGHT;
-                textView.setBackgroundResource(R.drawable.bubble_whatsapp);
-
-                textView.setLayoutParams(lp2);
-                layout.addView(textView);
-                scrollView.fullScroll(View.FOCUS_DOWN);
-                messageArea.setText("");
-
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            
+            try {
+                socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        });*/
+            Intent intent = new Intent(Chat.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     public void onClick(View view) {
@@ -143,6 +134,7 @@ public class Chat extends Activity {
                 InetAddress serverAddr = InetAddress.getByName(SERVER_IP);
 
                 socket = new Socket(serverAddr, SERVERPORT);
+                Log.e("IP Socket", String.valueOf(socket.getLocalSocketAddress()));
 
             } catch (UnknownHostException e1) {
                 e1.printStackTrace();

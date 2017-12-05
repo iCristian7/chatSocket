@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -41,16 +43,6 @@ public class ChatServidor extends Activity {
         this.serverThread = new Thread(new ServerThread());
         this.serverThread.start();
 
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        try {
-            serverSocket.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     class ServerThread implements Runnable {
@@ -125,34 +117,34 @@ public class ChatServidor extends Activity {
 
         @Override
         public void run() {
-            text.setText(text.getText().toString()+"Client Says: "+ msg + "\n");
+
+            if (msg == null) {
+                text.setText("fuera");
+                ChatServidor.this.finish();
+            } else {
+                text.setText(text.getText().toString() + "Client Says: " + msg + "\n");
+            }
         }
 
     }
 
-    private String getIpAddress()
-    {
+    private String getIpAddress() {
         String ip = "";
-        try
-        {
+        try {
             Enumeration<NetworkInterface> enumNetworkInterfaces = NetworkInterface.getNetworkInterfaces();
-            while (enumNetworkInterfaces.hasMoreElements())
-            {
+            while (enumNetworkInterfaces.hasMoreElements()) {
                 NetworkInterface networkInterface = enumNetworkInterfaces.nextElement();
                 Enumeration<InetAddress> enumInetAddress = networkInterface.getInetAddresses();
-                while (enumInetAddress.hasMoreElements())
-                {
+                while (enumInetAddress.hasMoreElements()) {
                     InetAddress inetAddress = enumInetAddress.nextElement();
 
-                    if (inetAddress.isSiteLocalAddress())
-                    {
+                    if (inetAddress.isSiteLocalAddress()) {
                         ip += "IP de Servidor: " + inetAddress.getHostAddress() + "\n";
                     }
 
                 }
             }
-        } catch (SocketException e)
-        {
+        } catch (SocketException e) {
             e.printStackTrace();
             ip += "¡Algo fue mal! " + e.toString() + "\n";
         }
