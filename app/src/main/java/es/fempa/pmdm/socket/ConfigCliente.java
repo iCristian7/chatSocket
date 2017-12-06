@@ -20,9 +20,6 @@ import java.util.Enumeration;
 
 import static es.fempa.pmdm.socket.R.id.ipServer;
 
-/**
- * Created by Christian on 20/11/2017.
- */
 
 public class ConfigCliente extends AppCompatActivity {
 
@@ -37,10 +34,7 @@ public class ConfigCliente extends AppCompatActivity {
 
     DataInputStream dataInputStream;
     DataOutputStream dataOutputStream;
-
     int puerto = 0;
-
-    GetMessagesThread HiloEscucha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,92 +46,19 @@ public class ConfigCliente extends AppCompatActivity {
         Nombre = (EditText) findViewById(R.id.TextNombre);
         button = (Button)findViewById(R.id.button);
 
-    }
-
-    public void volverInicio(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-        }
-
-    }
-
-    public void startClient(View v)
-    {
-        String TheIP = dirIP.getText().toString();
-        if(TheIP.length()>5)
-        {
-            button.setEnabled(false);
-            dirIP.setEnabled(false);
-
-            (new ClientConnectToServer(TheIP)).start();
-
-
-        }
-    }
-
-    private class ClientConnectToServer extends Thread
-    {
-        String mIp;
-        public ClientConnectToServer(String ip){mIp=ip;}
-        public void run()
-        {
-            //TODO Connect to server
-            try {
-
-                socket = new Socket(mIp, puerto);
-
-                try {
-                    dataInputStream = new DataInputStream(socket.getInputStream());
-                    dataOutputStream = new DataOutputStream(socket.getOutputStream());
-                }catch(Exception e){ e.printStackTrace();}
-
-                ConectionEstablished=true;
-                //Iniciamos el hilo para la escucha y procesado de mensajes
-                (HiloEscucha=new GetMessagesThread()).start();
-
-            } catch (Exception e) {
-                e.printStackTrace();
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ConfigCliente.this, ChatServidor.class);
+                intent.putExtra("tipo", "cliente");
+                intent.putExtra("puerto",Integer.parseInt(Puerto.getText().toString()));
+                intent.putExtra("ip", dirIP.getText().toString());
+                startActivity(intent);
             }
-        }
+        });
 
     }
 
-    private class GetMessagesThread extends Thread {
-        public boolean executing;
-        private String line;
 
-
-        public void run() {
-            executing = true;
-
-            while (executing) {
-                line = "";
-                line = ObtenerCadena();//Obtenemos la cadena del buffer
-                if (line != "" && line.length() != 0) {
-                }//Comprobamos que esa cadena tenga contenido
-            }
-        }
-
-        public void setExecuting(boolean execute) {
-            executing = execute;
-        }
-
-
-        private String ObtenerCadena() {
-            String cadena = "";
-
-            try {
-                cadena = dataInputStream.readUTF();//Leemos del datainputStream una cadena UTF
-                Log.d("ObtenerCadena", "Cadena reibida: " + cadena);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                executing = false;
-            }
-            return cadena;
-        }
-    }
 
 }
