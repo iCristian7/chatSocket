@@ -80,6 +80,8 @@ public class ChatServidor extends AppCompatActivity
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // en este metodo es donde se escribe el mensaje al alinearlo
+                //no tocar xd
                 String messageText = messageArea.getText().toString();
                 TextView textView = new TextView(ChatServidor.this);
                 textView.setTextColor(getResources().getColor(R.color.negro));
@@ -90,7 +92,7 @@ public class ChatServidor extends AppCompatActivity
                 lp2.weight = 1.0f;
                 lp2.setMargins(0,25,5,0);
 
-
+                //alineacion de texto
                 lp2.gravity = Gravity.LEFT;
                 textView.setBackgroundResource(R.drawable.bubble2_whatsapp);
 
@@ -368,6 +370,17 @@ public class ChatServidor extends AppCompatActivity
                 line="";
                 line=ObtenerCadena();//Obtenemos la cadena del buffer
                 if(line!="" && line.length()!=0) {//Comprobamos que esa cadena tenga contenido
+                    //aqui es donde hay q alinea el texto q recibe(a la derecha, como en el metodo de arriba)
+                    //habra que distinguir donde se escribe dependiendo de la pantalla si es server o cliente no?
+                    //no
+                    //por q aqui solo salen los mensajes recibidos, es decir estos van siempre a la izquierda
+                    //ok, sabes lo q tienes q hacer no?
+                    //TODO alinear mensajes a la derecha
+                    //TODO configurar en las Clases ConfigCliente y Config Servidor que la ip y el puerto se recogen del layout
+                    //TODO y se envian a la clase ChatServidor
+                    //esto es lo basico si sacas esto aprobamos seguro leete el pdf a ver como lo ves
+                    //solo faltaria eso de q al conectarse el cliente sepa si existe el servidor ok?
+                    //pero centrate en estos TODO ok-
                     AppenText("Recibido: " + line);//Procesamos la cadena recibida
                 }
             }
