@@ -39,7 +39,7 @@ public class ChatServidor extends AppCompatActivity
     LinearLayout layout;
     ScrollView scrollView;
     RelativeLayout layout_2;
-
+    String ip;
     Socket socket;
     ServerSocket serverSocket;
     boolean ConectionEstablished;
@@ -66,7 +66,9 @@ public class ChatServidor extends AppCompatActivity
         Intent data = getIntent();
         mPuerto = data.getIntExtra("puerto",-1);
         String tipo = data.getStringExtra("tipo");
+
         if(tipo.equals("cliente")){
+            ip = data.getStringExtra("ip");
             startClient();
         }else {
             startServer();
@@ -119,7 +121,7 @@ public class ChatServidor extends AppCompatActivity
 
     public void startClient()
     {
-        String TheIP="192.168.100.4";
+        String TheIP=this.ip;// hay q recoger la ip del intent que viene de la otra clase, HECHO
         if(TheIP.length()>5)
         {
             //ipServer.setEnabled(false);
