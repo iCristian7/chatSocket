@@ -10,4 +10,10 @@
     <string name="botonLoginCliente">Cliente</string>
     <string name="textLogin">La decisión es tuya.....</string>
     <string name="input_mensaje">Escribir mensaje</string>
+    <string name="acercade">Acerca De</string>
+    <string name="creadoPor">Creado por:</string>
+    <string name="primerInt">Miguel Verdú Nieto</string>
+    <string name="segInt">Christian Santos Morales</string>
+    <string name="terInt">Cristian Pérez Segura</string>
+    <string name="cuarInt">Javier Del Rey Serrano</string>
 </resources>

@@ -23,6 +23,7 @@
         <activity android:name=".ConfigServidor" />
         <activity android:name=".Chat" />
         <activity android:name=".ChatServidor"></activity>
+        <activity android:name=".AcercaDe"/>
     </application>
 
 </manifest>

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -28,6 +29,7 @@ import java.util.Enumeration;
 import java.util.Set;
 
 import android.content.Intent;
+import android.widget.Toast;
 
 public class ChatServidor extends AppCompatActivity
 {
@@ -39,7 +41,7 @@ public class ChatServidor extends AppCompatActivity
     LinearLayout layout;
     ScrollView scrollView;
     RelativeLayout layout_2;
-    String ip;
+    String ip, tipo;
     Socket socket;
     ServerSocket serverSocket;
     boolean ConectionEstablished;
@@ -48,6 +50,7 @@ public class ChatServidor extends AppCompatActivity
     DataOutputStream dataOutputStream;
 
     int mPuerto=1048;
+    int mPuertoServer = 1048;
     //Hilo para escuchar los mensajes que le lleguen por el socket
     GetMessagesThread HiloEscucha;
 
@@ -64,13 +67,14 @@ public class ChatServidor extends AppCompatActivity
 
         myTV=(TextView) findViewById(R.id.datos);
         Intent data = getIntent();
-        mPuerto = data.getIntExtra("puerto",-1);
-        String tipo = data.getStringExtra("tipo");
+        tipo = data.getStringExtra("tipo");
 
         if(tipo.equals("cliente")){
             ip = data.getStringExtra("ip");
+            mPuerto = data.getIntExtra("puerto",-1);
             startClient();
         }else {
+            mPuertoServer = data.getIntExtra("puerto_s",-1);
             startServer();
         }
 
@@ -87,45 +91,46 @@ public class ChatServidor extends AppCompatActivity
                 String messageText = messageArea.getText().toString();
                 TextView textView = new TextView(ChatServidor.this);
                 textView.setTextColor(getResources().getColor(R.color.negro));
-
+                textView.setPadding(25,18,20,0);
                 textView.setText(messageText);
 
                 LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 lp2.weight = 1.0f;
                 lp2.setMargins(0,25,5,0);
 
-                //alineacion de texto
-                lp2.gravity = Gravity.LEFT;
-                textView.setBackgroundResource(R.drawable.bubble2_whatsapp);
-
-
                 lp2.gravity = Gravity.RIGHT;
-                textView.setBackgroundResource(R.drawable.bubble_whatsapp);
+                textView.setBackgroundResource(R.drawable.burbuja_verde);
 
                 textView.setLayoutParams(lp2);
                 layout.addView(textView);
-                //scrollView.fullScroll(View.FOCUS_DOWN);
                 messageArea.setText("");
                 sendMessage(messageText);
             }
         });
     }
 
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            DisconnectSockets();
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     public void startServer()
     {
-        //ipServer.setEnabled(false);
-
         SetText("\nComenzamos Servidor!");
         (HiloEspera=new WaitingClientThread()).start();
     }
 
     public void startClient()
     {
-        String TheIP=this.ip;// hay q recoger la ip del intent que viene de la otra clase, HECHO
+        String TheIP=this.ip;// hay q recoger la ip del intent que viene de la otra clase,HECHO
         if(TheIP.length()>5)
         {
-            //ipServer.setEnabled(false);
-
             (new ClientConnectToServer(TheIP)).start();
 
             SetText("\nComenzamos Cliente!");
@@ -135,7 +140,31 @@ public class ChatServidor extends AppCompatActivity
 
     public void AppenText(String text)
     {
+
         runOnUiThread(new appendUITextView(text+"\n"));
+
+    }
+    public void recibirMensaje(final String text){
+
+        runOnUiThread(new Runnable(){
+            LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            TextView textView = new TextView(ChatServidor.this);
+            @Override
+            public void run() {
+
+                textView.setTextColor(getResources().getColor(R.color.negro));
+                textView.setPadding(25,18,20,0);
+                textView.setText(text);
+                lp2.weight = 1.0f;
+
+                lp2.setMargins(0,25,5,0);
+
+                lp2.gravity = Gravity.LEFT;
+                textView.setBackgroundResource(R.drawable.burbuja_blanca);
+                textView.setLayoutParams(lp2);
+                layout.addView(textView);
+            }
+        } );
     }
 
     public void SetText(String text)
@@ -151,7 +180,7 @@ public class ChatServidor extends AppCompatActivity
             try
             {
                 //Abrimos el socket
-                serverSocket = new ServerSocket(mPuerto);
+                serverSocket = new ServerSocket(mPuertoServer);
 
                 //Mostramos un mensaje para indicar que estamos esperando en la direccion ip y el puerto...
                 AppenText("Creado el servidor\n Dirección: "+getIpAddress()+" Puerto: "+serverSocket.getLocalPort());
@@ -170,8 +199,7 @@ public class ChatServidor extends AppCompatActivity
                 //Iniciamos el hilo para la escucha y procesado de mensajes
                 (HiloEscucha=new GetMessagesThread()).start();
 
-                //Enviamos mensajes desde el servidor.
-                //(new EnvioMensajesServidor()).start();
+
                 HiloEspera=null;
             }
             catch (IOException e)
@@ -201,6 +229,10 @@ public class ChatServidor extends AppCompatActivity
                 ConectionEstablished=true;
                 //Iniciamos el hilo para la escucha y procesado de mensajes
                 (HiloEscucha=new GetMessagesThread()).start();
+                if(HiloEscucha.isInterrupted()){
+                    finish();
+                }
+                SetText("Ya se ha conectado\n");
 
                 //new EnvioMensajesCliente().start();
 
@@ -239,17 +271,10 @@ public class ChatServidor extends AppCompatActivity
         }
     }
 
-    private void DisconnectSockets()
+    public void DisconnectSockets()
     {
         if(ConectionEstablished)
         {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run()
-                {
-                    ipServer.setEnabled(true);
-                }
-            });
             ConectionEstablished = false;
 
             if (HiloEscucha != null)
@@ -320,8 +345,6 @@ public class ChatServidor extends AppCompatActivity
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            //dataOutputStream.close();
-            //AppenText("Enviado: "+msg);
 
         }
     }
@@ -371,19 +394,13 @@ public class ChatServidor extends AppCompatActivity
             {
                 line="";
                 line=ObtenerCadena();//Obtenemos la cadena del buffer
-                if(line!="" && line.length()!=0) {//Comprobamos que esa cadena tenga contenido
-                    //aqui es donde hay q alinea el texto q recibe(a la derecha, como en el metodo de arriba)
-                    //habra que distinguir donde se escribe dependiendo de la pantalla si es server o cliente no?
-                    //no
-                    //por q aqui solo salen los mensajes recibidos, es decir estos van siempre a la izquierda
-                    //ok, sabes lo q tienes q hacer no?
-                    //TODO alinear mensajes a la derecha
-                    //TODO configurar en las Clases ConfigCliente y Config Servidor que la ip y el puerto se recogen del layout
-                    //TODO y se envian a la clase ChatServidor
-                    //esto es lo basico si sacas esto aprobamos seguro leete el pdf a ver como lo ves
-                    //solo faltaria eso de q al conectarse el cliente sepa si existe el servidor ok?
-                    AppenText("Recibido: " + line);//Procesamos la cadena recibida
+                if(line!="" && line.length()!=0) {
+
+                    recibirMensaje(line);//Procesamos la cadena recibida
                 }
+            }
+            if(this.isInterrupted()){
+                finish();
             }
         }
 
@@ -425,6 +442,13 @@ public class ChatServidor extends AppCompatActivity
     protected void onDestroy() {
         super.onDestroy();
         DisconnectSockets();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        DisconnectSockets();
+        HiloEscucha.interrupt();
     }
 
 }

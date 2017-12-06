@@ -38,7 +38,7 @@ public class ConfigServidor extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(ConfigServidor.this, ChatServidor.class);
                 intent.putExtra("tipo", "servidor");
-                intent.putExtra("puerto",Integer.parseInt(puerto.getText().toString()));
+                intent.putExtra("puerto_s",Integer.parseInt(puerto.getText().toString()));
                 startActivity(intent);
             }
         });
