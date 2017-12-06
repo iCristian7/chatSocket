@@ -369,7 +369,9 @@ public class ChatServidor extends AppCompatActivity
                 line=ObtenerCadena();//Obtenemos la cadena del buffer
                 if(line!="" && line.length()!=0) {//Comprobamos que esa cadena tenga contenido
                     AppenText("Recibido: " + line);//Procesamos la cadena recibida
+                    //TODO alineacion texto
                 }
+
             }
         }
 
