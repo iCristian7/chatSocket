@@ -380,7 +380,6 @@ public class ChatServidor extends AppCompatActivity
                     //TODO y se envian a la clase ChatServidor
                     //esto es lo basico si sacas esto aprobamos seguro leete el pdf a ver como lo ves
                     //solo faltaria eso de q al conectarse el cliente sepa si existe el servidor ok?
-                    //pero centrate en estos TODO ok-
                     AppenText("Recibido: " + line);//Procesamos la cadena recibida
                 }
             }
