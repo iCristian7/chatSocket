@@ -19,7 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Chat"></activity>
+        <activity android:name=".ConfigCliente" />
+        <activity android:name=".ConfigServidor" />
+        <activity android:name=".Chat" />
+        <activity android:name=".ChatServidor"></activity>
     </application>
 
 </manifest>
