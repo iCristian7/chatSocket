@@ -44,131 +44,30 @@ public class Chat extends Activity {
     EditText messageArea;
     ScrollView scrollView;
     RelativeLayout layout_2;
-    Thread clientThread = null;
-
     private String response="";
-
     private TextView text;
-    private int SERVERPORT;
-    private String SERVER_IP;
-    private Socket socket;
-    private BufferedReader in;
-    private PrintWriter out;
-
-    Handler updateConversationHandler;
-
+    ChatServidor server;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-
-
+        server = new ChatServidor();
         sendButton = (ImageView) findViewById(R.id.sendButton);
         messageArea = (EditText) findViewById(R.id.messageArea);
         layout = (LinearLayout) findViewById(R.id.layout1);
         layout_2 = (RelativeLayout) findViewById(R.id.layout2);
         scrollView = (ScrollView) findViewById(R.id.scrollView);
-
-        Intent data = getIntent();
-        String tipo = data.getStringExtra("tipo");
-        SERVERPORT = data.getIntExtra("puerto", -1);
-        SERVER_IP = data.getStringExtra("ip");
-        text = (TextView) findViewById(R.id.datos);
-
-
-
-        this.clientThread = new Thread(new Chat.ClientThread());
-        this.clientThread.start();
-    }
-/*
+        server.startClient();
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                String messageText = messageArea.getText().toString();
-
-                TextView textView = new TextView(Chat.this);
-                textView.setTextColor(getResources().getColor(R.color.negro));
-
-                textView.setText(messageText);
-
-                LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                lp2.weight = 1.0f;
-                lp2.setMargins(0,25,5,0);
-
-
-                lp2.gravity = Gravity.LEFT;
-                textView.setBackgroundResource(R.drawable.bubble2_whatsapp);
-
-
-                lp2.gravity = Gravity.RIGHT;
-                textView.setBackgroundResource(R.drawable.bubble_whatsapp);
-
-                textView.setLayoutParams(lp2);
-                layout.addView(textView);
-                scrollView.fullScroll(View.FOCUS_DOWN);
-                messageArea.setText("");
-
+            public void onClick(View view) {
+                server.SetText(messageArea.getText().toString());
             }
-        });*/
+        });
 
-
-                public void onClick(View view) {
-                    String messageText = messageArea.getText().toString();
-
-                    TextView textView = new TextView(Chat.this);
-                    textView.setTextColor(getResources().getColor(R.color.negro));
-                    textView.setPadding(25,18,20,0);
-                    textView.setText(messageText);
-
-                    LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    lp2.weight = 1.0f;
-                    lp2.setMargins(0,25,5,0);
-
-
-
-
-                    lp2.gravity = Gravity.RIGHT;
-                    textView.setBackgroundResource(R.drawable.burbuja_verde);
-
-                    textView.setLayoutParams(lp2);
-                    layout.addView(textView);
-                    //scrollView.fullScroll(View.FOCUS_DOWN);
-                    messageArea.setText("");
-                    try {
-                        PrintWriter out = new PrintWriter(new BufferedWriter(
-                                new OutputStreamWriter(socket.getOutputStream())),
-                                true);
-                        out.println(messageText);
-                    } catch (UnknownHostException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-
-        class ClientThread implements Runnable {
-
-            @Override
-            public void run() {
-                try{
-                    socket = new Socket(SERVER_IP , SERVERPORT);
-
-
-                } catch (UnknownHostException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-
-        }
-
+    }
 
 
 
